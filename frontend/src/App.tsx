@@ -1,14 +1,16 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import Dashboard from './pages/Dashboard'
-import CVEditor from './pages/CVEditor'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Clock from './pages/Clock'
-import Jokes from './pages/Jokes'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Header from './components/Header'
 import ProtectedRoute from './components/ProtectedRoute'
+
+// Pages
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import CVEditor from './pages/CVEditor'
+import Clock from './pages/Clock'
+import Jokes from './pages/Jokes'
 
 function App() {
   return (
@@ -20,16 +22,23 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/clock" element={<Clock />} />
         <Route path="/jokes" element={<Jokes />} />
-        <Route path="/dashboard" element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        } />
-        <Route path="/editor/:cvId" element={
-          <ProtectedRoute>
-            <CVEditor />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/editor/:cvId"
+          element={
+            <ProtectedRoute>
+              <CVEditor />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   )
